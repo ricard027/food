@@ -2,7 +2,6 @@ import Button from '@/components/button'
 import Card from '@/components/card'
 import Product from '@/components/product'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -117,61 +116,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className='bg-white pb-20'>
-        <div className='container m-auto max-w-6xl relative'>
-          <Image src={'/banner.png'} width={1440} height={400} alt='banner' />
-          <div className='absolute w-full top-0 h-full flex flex-col justify-center items-center gap-4'>
-            <p className='font-semibold text-2xl text-white max-w-md text-center'>
-              Join our member and get discount up to 50%
-            </p>
-            <Button>Sign up</Button>
-          </div>
+      <section className='bg-red-500 flex justify-between min-h-80 contain      er m-auto max-w-6xl px-4'>
+        <div className='grid grid-cols-2 flex-1'>
+          <div className=' bg-green-400 col-span-2 bg-[url(/grid-image1.png)] bg-center bg-no-repeat bg-cover'></div>
+          <div className='bg-blue-300'></div>
+          <div className='bg-gray-600'></div>
         </div>
+        <div className='bg-green-500 flex-1'></div>
       </section>
-      <footer className='pt-20'>
-        <div className='container max-w-6xl m-auto  grid grid-cols-4 border-[#1d1d1d] border-b pb-20'>
-          <div className=' flex flex-col gap-4'>
-            <Link className='flex items-baseline gap-1' href={'/'}>
-              <p className='text-lg font-semibold'>Lets Food</p>
-              <Image src='/logo.svg' alt='image logo' width={30} height={30} />
-            </Link>
-            <p>Jalan Semangka Raya, Telaga Murni,Cikarang Barat, Kab. Bekasi</p>
-            <div className='flex items-center gap-4'>
-              <span>icon</span>
-              <span>icon</span>
-              <span>icon</span>
-            </div>
-          </div>
-          <div className=' flex flex-col gap-4'>
-            <p className='text-lg font-semibold'>Company</p>
-            <ul className='flex flex-col gap-2'>
-              <li>About Us</li>
-              <li>Carrer</li>
-              <li>How It Work</li>
-            </ul>
-          </div>
-          <div className=' flex flex-col gap-4'>
-            <p className='text-lg font-semibold'>Policy</p>
-            <ul className='flex flex-col gap-2'>
-              <li>FAQ</li>
-              <li>Privacy</li>
-              <li>Shipping</li>
-            </ul>
-          </div>
-          <div className=' flex flex-col gap-4'>
-            <p className='text-lg font-semibold'>Get In Touch</p>
-            <ul className='flex flex-col gap-2'>
-              <li>+62 896 7311 2766</li>
-              <li>food@example.com</li>
-            </ul>
-          </div>
-        </div>
-        <div className='py-10'>
-          <p className='text-center text-sm'>
-            © 2022 Let’sFood. ALL RIGHT RESERVED.
-          </p>
-        </div>
-      </footer>
     </main>
   )
 }
