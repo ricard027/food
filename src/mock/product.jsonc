@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "name": "Fruit salad",
+      "image": "/fruitsalad.png",
+      "price": 50.0
+    },
+    {
+      "name": "Sandwich",
+      "image": "/sandwich.png",
+      "price": 20.0
+    },
+    {
+      "name": "Noodle",
+      "image": "/noodle.png",
+      "price": 60.0
+    },
+    {
+      "name": "Japonese Noodle",
+      "image": "/noodlejaponese.png",
+      "price": 60.0
+    }
+  ]
+}
