@@ -46,18 +46,20 @@ const HeaderComponent = () => {
                 />
               </span>
             </div>
-            <Button
-              icon={
-                <Image
-                  src='/login.svg'
-                  alt='image logo'
-                  width={15}
-                  height={15}
-                />
-              }
-            >
-              Sign in
-            </Button>
+            <Link href={'/register'}>
+              <Button
+                icon={
+                  <Image
+                    src='/login.svg'
+                    alt='image logo'
+                    width={15}
+                    height={15}
+                  />
+                }
+              >
+                Sign in
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
