@@ -2,16 +2,18 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Button from '../button'
 import useUser from '@/hook/useUser'
+
 import IF from '../IF'
+import Button from '../button'
+import ProfileMenu from './menu'
+import CartSidebar from '../cart'
 
 const HeaderComponent = () => {
-  const { handleLogoutUser, isAuthenticated } = useUser()
-
+  const { isAuthenticated } = useUser()
   return (
     <>
-      <header className='z-50 fixed left-0 top-0 flex w-full items-center justify-center bg-secondary'>
+      <header className='z-50 fixed left-0 top-0 flex w-screen items-center justify-center bg-secondary'>
         <div className='container m-auto flex max-w-6xl items-center justify-between py-4  px-4'>
           <Link className='flex items-baseline gap-1' href={'/'}>
             <p className='text-lg font-semibold'>Lets Food</p>
@@ -34,24 +36,6 @@ const HeaderComponent = () => {
             </ul>
           </nav>
           <div className='flex gap-6'>
-            <div className='flex items-center gap-6'>
-              <span className='cursor-pointer'>
-                <Image
-                  src='/search.svg'
-                  alt='image logo'
-                  width={20}
-                  height={20}
-                />
-              </span>
-              <span className='cursor-pointer'>
-                <Image
-                  src='/cart.svg'
-                  alt='image logo'
-                  width={20}
-                  height={20}
-                />
-              </span>
-            </div>
             <IF condition={!isAuthenticated}>
               <Link href={'/login'}>
                 <Button
@@ -69,8 +53,9 @@ const HeaderComponent = () => {
               </Link>
             </IF>
             <IF condition={isAuthenticated}>
-              <button onClick={handleLogoutUser}>sair</button>
+              <ProfileMenu />
             </IF>
+            <CartSidebar />
           </div>
         </div>
       </header>
