@@ -3,6 +3,7 @@ import './globals.css'
 import HeaderComponent from '@/components/header'
 import { Readex_Pro } from 'next/font/google'
 import Footer from '@/components/footer'
+import UserContextProvider from '@/context/userContext'
 
 const Readex = Readex_Pro({
   subsets: ['latin'],
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang='pt-br'>
       <body className={`${Readex.className} antialiased`}>
-        <HeaderComponent />
-        {children}
-        <Footer />
+        <UserContextProvider>
+          <HeaderComponent />
+          {children}
+          <Footer />
+        </UserContextProvider>
       </body>
     </html>
   )
