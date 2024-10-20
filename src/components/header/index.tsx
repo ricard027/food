@@ -1,8 +1,14 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import Button from '../button'
+import useUser from '@/hook/useUser'
+import IF from '../IF'
 
 const HeaderComponent = () => {
+  const { handleLogoutUser, isAuthenticated } = useUser()
+
   return (
     <>
       <header className='z-50 fixed left-0 top-0 flex w-full items-center justify-center bg-secondary'>
@@ -46,20 +52,25 @@ const HeaderComponent = () => {
                 />
               </span>
             </div>
-            <Link href={'/register'}>
-              <Button
-                icon={
-                  <Image
-                    src='/login.svg'
-                    alt='image logo'
-                    width={15}
-                    height={15}
-                  />
-                }
-              >
-                Sign in
-              </Button>
-            </Link>
+            <IF condition={!isAuthenticated}>
+              <Link href={'/login'}>
+                <Button
+                  icon={
+                    <Image
+                      src='/login.svg'
+                      alt='image logo'
+                      width={15}
+                      height={15}
+                    />
+                  }
+                >
+                  Entrar
+                </Button>
+              </Link>
+            </IF>
+            <IF condition={isAuthenticated}>
+              <button onClick={handleLogoutUser}>sair</button>
+            </IF>
           </div>
         </div>
       </header>
