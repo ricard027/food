@@ -1,12 +1,9 @@
 'use client'
 
 import { auth } from '@/config/firebaseconfig'
+import { GetUserService } from '@/service/getUserService'
 import { IUser } from '@/types/user'
-import {
-  onAuthStateChanged,
-  signOut,
-  User as FirebaseUser
-} from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { createContext, FC, ReactNode, useEffect, useState } from 'react'
 
 interface IUserContext {
@@ -32,23 +29,11 @@ const UserContextProvider: FC<UserContextProviderProps> = ({ children }) => {
     }
   }
 
-  const mapUserData = (user: FirebaseUser): IUser => {
-    const providerId = user.providerData[0]?.providerId
-
-    return {
-      id: user.uid,
-      name: user.displayName || 'Usuário',
-      email: user.email || '',
-      creationTime: user.metadata.creationTime || '',
-      provider: providerId === 'google.com' ? 'Google' : 'Email/Password',
-      profileImage: user.photoURL || undefined
-    }
-  }
-
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUserData(mapUserData(user))
+        const userResult = (await GetUserService(user)) as IUser
+        setUserData(userResult)
         console.log('Usuário autenticado:', user)
       } else {
         setUserData(null)
