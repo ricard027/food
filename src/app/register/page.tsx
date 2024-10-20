@@ -1,18 +1,18 @@
-const RegisterPage = async () => {
+'use client'
+
+import { RegisterModel } from './registerModel'
+import RegisterView from './registerView'
+
+const RegisterPage = () => {
+  const { errors, handleSubmit, handleSubmitForm, register } = RegisterModel()
+
   return (
-    <section>
-      <div className='container max-w-6xl m-auto  min-h-screen grid grid-cols-2 '>
-        <div className='bg-red-400'>
-          <h1>Cadastre-se</h1>
-        </div>
-        <div className='bg-primary'>
-          <label htmlFor=''>
-            <legend>Name</legend>
-            <input type='text' />
-          </label>
-        </div>
-      </div>
-    </section>
+    <RegisterView
+      errors={errors}
+      register={register}
+      handleSubmit={handleSubmit}
+      handleSubmitForm={handleSubmitForm}
+    />
   )
 }
 export default RegisterPage

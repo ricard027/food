@@ -1,32 +1,12 @@
-export interface IUser {
-  username: string
-  firstName: string
-  lastName: string
-  email: string
-}
+import { db } from '@/config/firebaseconfig'
+import { IUser } from '@/types/user'
+import { addDoc, collection } from 'firebase/firestore'
 
-interface IResponse {
-  username: string
-  spoonacularPassword: string
-  hash: string
-}
-export interface IcreaetUser {
-  exec: (requestData: IUser) => Promise<IResponse>
-}
-export class CreateUser implements IcreaetUser {
-  async exec(requestData: IUser): Promise<IResponse> {
-    const data = await fetch(
-      `https://api.spoonacular.com/users/connect?&apiKey=${process.env.NEXT_API_KEY}`,
-      {
-        body: JSON.stringify(requestData),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-        method: 'POST'
-      }
-    )
-
-    return data.json()
+export const CreateUserService = async (formData: IUser) => {
+  try {
+    const docRef = await addDoc(collection(db, 'users'), formData)
+    return docRef
+  } catch (error) {
+    console.log(error, 'Erro ao tentar efetuar o cadastro!')
   }
 }
