@@ -1,13 +1,11 @@
-import { GetmenuItemsService } from '@/service/getMenuItemService'
+import { GetProductsByCategoryService } from '@/service/getProductsByCategoryService'
 
 const shelfModel = async () => {
-  const menuService = new GetmenuItemsService()
+  const categoryProducts = await GetProductsByCategoryService({
+    category: 'Seafood'
+  })
 
-  const fetchProduct = await menuService.exec('salad', 4)
-
-  const { menuItems } = await fetchProduct.json()
-
-  return { data: menuItems }
+  return categoryProducts
 }
 
 export default shelfModel
