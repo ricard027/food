@@ -1,20 +1,21 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { SlSocialFacebook, SlSocialInstagram, SlSocialYoutube } from 'react-icons/sl'
 
 const Footer = () => {
   return (
-    <footer className='pt-20'>
-      <div className='container max-w-6xl m-auto  grid grid-cols-4 border-[#1d1d1d] border-b pb-20'>
-        <div className=' flex flex-col gap-4'>
+    <footer className='pt-20 bg-secondary'>
+      <div className='container max-w-6xl m-auto  md:grid md:grid-cols-4 sm:grid-cols-2 sm:gap-6 md:gap-4 xs:flex xs:flex-col xs:gap-6 border-[#1d1d1d] border-b pb-20  sm:px-6 xs:px-6  md:px-6 '>
+        <div className=' flex flex-col gap-4 max-w-56 '>
           <Link className='flex items-baseline gap-1' href={'/'}>
             <p className='text-lg font-semibold'>Lets Food</p>
             <Image src='/logo.svg' alt='image logo' width={30} height={30} />
           </Link>
           <p>Jalan Semangka Raya, Telaga Murni,Cikarang Barat, Kab. Bekasi</p>
           <div className='flex items-center gap-4'>
-            <span>icon</span>
-            <span>icon</span>
-            <span>icon</span>
+            <SlSocialInstagram  size={20} />
+            <SlSocialFacebook  size={20}  />
+            <SlSocialYoutube  size={20}  />
           </div>
         </div>
         <div className=' flex flex-col gap-4'>
