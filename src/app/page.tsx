@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Block from '@/components/block'
 
 import * as motion from 'framer-motion/client'
+import WidgetCategory from '@/components/widgetCategory'
+import Shelf from '@/components/shelf'
 
 export default function Home() {
   return (
@@ -81,6 +83,7 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
+
         <div className='md:flex sm:hidden xs:hidden flex-col -translate-x-full  gap-4  absolute bottom-24'>
           <Image
             width={120}
@@ -96,6 +99,13 @@ export default function Home() {
           />
         </div>
       </section>
+      <section>
+        <div className='bg-white pt-20'>
+          <div className='xs:px-4 max-w-6xl w-full m-auto sm:px-6 md:px-6 lg:px-0'>
+            <WidgetCategory />
+          </div>
+        </div>
+      </section>
       <section className='bg-white py-20'>
         <div className='m-auto max-w-6xl container'>
           <Block time={0.5}>
@@ -109,7 +119,7 @@ export default function Home() {
             </div>
           </Block>
 
-          <div className='flex justify-between md:gap-6'>
+          <div className='flex justify-between md:gap-6 md:flex-row sm:flex-col xs:flex-col'>
             <Block time={0.5}>
               <Card
                 src='/order.png'
@@ -147,15 +157,16 @@ export default function Home() {
               </p>
             </div>
           </Block>
-          {/* <Block time={0.9}> <Shelf /> </Block> */}
-
-          <div className='flex items-center justify-center mt-20 mb-6'>
+          <div className='flex items-center justify-center mt-20 mb-6 flex-col gap-8'>
+            <div className='xs:px-4 max-w-6xl w-full m-auto sm:px-6 md:px-6 lg:px-0 '>
+              <Shelf />
+            </div>
             <Button>More Menu</Button>
           </div>
         </div>
       </section>
       <Block time={0.5}>
-        <section className='w-full bg-white pb-20'>
+        <section className='w-full bg-white pb-20 md:flex sm:hidden xs:hidden'>
           <div className='container m-auto max-w-6xl relative'>
             <Image src={'/banner.png'} width={1440} height={400} alt='banner' />
             <div className='absolute w-full top-0 h-full flex flex-col justify-center items-center gap-4'>
