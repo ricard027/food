@@ -13,10 +13,10 @@ const HeaderComponent = () => {
   const { isAuthenticated } = useUser()
   return (
     <>
-      <header className='z-50 fixed left-0 top-0 flex w-screen items-center justify-center bg-secondary'>
+      <header className='z-50 fixed left-0 top-0 flex w-screen items-center justify-center bg-secondary sm:px-6 xs:px-6 md:px-0'>
         <div className='container m-auto flex max-w-6xl items-center justify-between py-4  px-4'>
           <Link className='flex items-baseline gap-1' href={'/'}>
-            <p className='text-lg font-semibold'>Lets Food</p>
+            <p className='md:text-lg sm:text-sm xs:text-xs  font-semibold line-clamp-1'>Lets Food</p>
             <Image src='/logo.svg' alt='image logo' width={30} height={30} />
           </Link>
           <nav className='xs:hidden md:flex sm:hidden '>
