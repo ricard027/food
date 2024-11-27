@@ -5,6 +5,8 @@ import { FC, useState } from 'react'
 
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { PiBowlFoodThin } from 'react-icons/pi'
+import Button from '../button'
+import useCart from '@/hook/useCart'
 
 interface IProduct {
   idMeal: string
@@ -14,6 +16,21 @@ interface IProduct {
 
 const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
   const [favoriteProduct, setFavoriteProduct] = useState(false)
+   const {addProduct} = useCart()
+
+  const priceMocked =  new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(Number(idMeal) / 1000);
+
+ const product =  {
+  id: idMeal,
+  name: strMeal,
+  price: Number(idMeal) / 1000,
+  img:  strMealThumb,
+  quantity: 1,
+}
+
   return (
     <div className='flex flex-col justify-between bg-[#f1f1f1] gap-6 shadow-lg  rounded-lg  items-center relative mb-4'>
       <div
@@ -40,8 +57,9 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
             </span>
           </p>
         </div>
-        <div className='flex justify-between w-full'>
-          <p>R${idMeal}</p>
+        <div className='flex justify-between w-full items-center gap-2'>
+          <p>{priceMocked}</p>
+          <Button  onClick={()=> addProduct(product)}>Adicionar</Button>
         </div>
       </div>
     </div>
