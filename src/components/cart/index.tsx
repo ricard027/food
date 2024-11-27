@@ -3,9 +3,12 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaTimes } from 'react-icons/fa'
 import { BsCart2 } from 'react-icons/bs'
+import useCart from '@/hook/useCart'
+import CartProduct from '../cartProduct/CartProduct'
 
 export default function CartSidebar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { cartProducts } = useCart()
 
   const toggleCart = () => {
     setIsOpen(!isOpen)
@@ -16,15 +19,29 @@ export default function CartSidebar() {
     closed: { x: '100%' }
   }
 
+  const CONTAIN_PRODUCT = cartProducts.length > 0
+
+  const totalPrice =
+    CONTAIN_PRODUCT &&
+    cartProducts.reduce(
+      (acc, { price, quantity }) => acc + price * (quantity ?? 0),
+      0
+    )
+
+  const priceFormated = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(Number(totalPrice))
+
   return (
     <>
       <button
         onClick={toggleCart}
-        className='flex items-center space-x-2 focus:outline-none  p-2 rounded-full hover:bg-[rgb(0,0,0,.1)] relative'
+        className='flex items-center space-x-2 focus:outline-none  p-2 rounded-full hover:bg-gray-10 relative'
       >
         <BsCart2 size={20} />
         <span className='text-textLight text-center text-[10px] p-1 rounded-full w-4 h-4 flex items-center justify-center absolute -top-2 right-0 bg-red-500 text-white'>
-          0
+          {cartProducts.length}
         </span>
       </button>
       <motion.div
@@ -44,27 +61,31 @@ export default function CartSidebar() {
           </button>
         </div>
 
-        <div className='p-4 overflow-y-auto h-[calc(100%-64px)]  flex justify-between flex-col'>
-          <ul>
-            <div className='flex items-center justify-between p-2 mb-2 border-b'>
-              <div>
-                <h3 className='text-sm font-semibold'>Produto 1</h3>
-                <p className='text-sm text-gray-600'>R$ 100,00</p>
-              </div>
-              <span className='text-sm font-semibold'>1x</span>
-            </div>
-            <div className='flex items-center justify-between p-2 mb-2 border-b'>
-              <div>
-                <h3 className='text-sm font-semibold'>Produto 2</h3>
-                <p className='text-sm text-gray-600'>R$ 200,00</p>
-              </div>
-              <span className='text-sm font-semibold'>2x</span>
-            </div>
+        <div className='p-4 overflow-y-auto h-[calc(100%-64px)]  flex justify-between flex-col bg-white'>
+          <ul className='max-h-[50%] h-full overflow-y-scroll'>
+            {!!cartProducts.length &&
+              cartProducts.map(({ id, img, price, quantity, name }) => (
+                <CartProduct
+                  name={name}
+                  image={img}
+                  price={price}
+                  quantity={quantity ?? 0}
+                  key={id}
+                  id={id}
+                />
+              ))}
           </ul>
-
-          <button className='w-full px-4 py-2 mt-4 font-semibold text-white bg-[#121212] rounded '>
-            IR PARA O CHECKOUT
-          </button>
+          <div>
+            <div className='flex flex-col w-full'>
+              <div className='flex justify-between w-full'>
+                <p>Total</p>
+                <p>{priceFormated}</p>
+              </div>
+            </div>
+            <button className='w-full px-4 py-2 mt-4 font-semibold text-white bg-[#121212] rounded '>
+              IR PARA O CHECKOUT
+            </button>
+          </div>
         </div>
       </motion.div>
     </>
