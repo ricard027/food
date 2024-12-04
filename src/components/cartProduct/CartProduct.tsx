@@ -29,7 +29,7 @@ const CartProduct: FC<ICartProduct> = ({
     <div className='flex items-center justify-between p-2 mb-2 border-b w-full gap-2'>
       <Image src={image} alt={name} width={80} height={80} />
       <div className='flex flex-col'>
-        <h3 className='text-sm font-semibold'>{name}</h3>
+        <h3 className='text-sm font-semibold line-clamp-2'>{name}</h3>
         <p className='text-sm text-gray-600'>{priceFormated}</p>
       </div>
       <div className='flex items-center gap-2'>
