@@ -1,6 +1,7 @@
 import BreadCrumb from '@/components/breadcrumb'
 import CategoryWidget from '@/components/category'
 import GridLayout from '@/components/gridLayout'
+
 import { GetFoodsCategoryService } from '@/service/getCategoryFoodsService'
 import { CiSearch } from 'react-icons/ci'
 
