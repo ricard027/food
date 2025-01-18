@@ -1,5 +1,4 @@
 'use client'
-// import { MenuItem } from '@/service/getMenuItemService'
 import Image from 'next/image'
 import { FC, useState } from 'react'
 
