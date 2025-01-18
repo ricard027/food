@@ -7,6 +7,8 @@ import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { PiBowlFoodThin } from 'react-icons/pi'
 import Button from '../button'
 import useCart from '@/hook/useCart'
+import IF from '../IF'
+import Quantity from './Quantity'
 
 export interface IProduct {
   idMeal: string
@@ -16,7 +18,7 @@ export interface IProduct {
 
 const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
   const [favoriteProduct, setFavoriteProduct] = useState(false)
-  const { addProduct } = useCart()
+  const { addProduct, toggleCart, cartProducts } = useCart()
 
   const priceMocked = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -30,6 +32,8 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
     img: strMealThumb,
     quantity: 1
   }
+
+  const containThisProductInCart = cartProducts.find(({ id }) => id === idMeal)
 
   return (
     <div className='flex flex-col justify-between bg-[#f1f1f1]  gap-2 shadow-lg  rounded-lg  items-center relative mb-4'>
@@ -59,7 +63,23 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
         </div>
         <div className='flex justify-between w-full items-center gap-2 xs:flex-col sm:flex-col md:flex-row'>
           <p>{priceMocked}</p>
-          <Button onClick={() => addProduct(product)}>Adicionar</Button>
+          <IF condition={!containThisProductInCart}>
+            <Button
+              onClick={() => {
+                addProduct(product)
+
+                toggleCart()
+              }}
+            >
+              {containThisProductInCart ? 'Adicionado' : 'Adicionar'}
+            </Button>
+          </IF>
+
+          <IF condition={Boolean(containThisProductInCart)}>
+            <div className='p-2'>
+              <Quantity product={containThisProductInCart as any} />
+            </div>
+          </IF>
         </div>
       </div>
     </div>
