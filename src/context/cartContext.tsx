@@ -14,12 +14,19 @@ export interface ICart {
   cartProducts: IProduct[]
   addProduct: (product: IProduct) => void
   removeProduct: (productId: string) => void
+  toggleCart: () => void
+  isOpen: boolean
 }
 
 export const CartContext = createContext<ICart | undefined>(undefined)
 
 const CartContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [cartProducts, setCartProducts] = useState<IProduct[]>([])
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleCart = () => {
+    setIsOpen(!isOpen)
+  }
 
   const addProduct = (product: IProduct) => {
     setCartProducts((prev) => {
@@ -46,9 +53,11 @@ const CartContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
       return prev.filter((p) => p.id !== productId)
     })
   }
-   console.log(cartProducts,'produtos')
+  console.log(isOpen, 'produtos')
   return (
-    <CartContext.Provider value={{ addProduct, cartProducts, removeProduct }}>
+    <CartContext.Provider
+      value={{ addProduct, cartProducts, removeProduct, toggleCart, isOpen }}
+    >
       {children}
     </CartContext.Provider>
   )
