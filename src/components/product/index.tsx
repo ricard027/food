@@ -8,7 +8,7 @@ import { PiBowlFoodThin } from 'react-icons/pi'
 import Button from '../button'
 import useCart from '@/hook/useCart'
 
-interface IProduct {
+export interface IProduct {
   idMeal: string
   strMeal: string
   strMealThumb: string
@@ -16,36 +16,36 @@ interface IProduct {
 
 const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
   const [favoriteProduct, setFavoriteProduct] = useState(false)
-   const {addProduct} = useCart()
+  const { addProduct } = useCart()
 
-  const priceMocked =  new Intl.NumberFormat('pt-BR', {
+  const priceMocked = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL',
-  }).format(Number(idMeal) / 1000);
+    currency: 'BRL'
+  }).format(Number(idMeal) / 1000)
 
- const product =  {
-  id: idMeal,
-  name: strMeal,
-  price: Number(idMeal) / 1000,
-  img:  strMealThumb,
-  quantity: 1,
-}
+  const product = {
+    id: idMeal,
+    name: strMeal,
+    price: Number(idMeal) / 1000,
+    img: strMealThumb,
+    quantity: 1
+  }
 
   return (
-    <div className='flex flex-col justify-between bg-[#f1f1f1] gap-6 shadow-lg  rounded-lg  items-center relative mb-4'>
+    <div className='flex flex-col justify-between bg-[#f1f1f1]  gap-2 shadow-lg  rounded-lg  items-center relative mb-4'>
       <div
         className='absolute flex items-center justify-center  left-4 top-4 cursor-pointer z-10'
         onClick={() => setFavoriteProduct((prev) => !prev)}
       >
         {favoriteProduct ? <GoHeartFill /> : <GoHeart />}
       </div>
-      <div className='p-6 pb-0 relative overflow-hidden w-full flex items-center justify-center pointer-events-none'>
+      <div className='pb-0 relative overflow-hidden w-full flex items-center justify-center pointer-events-none'>
         <Image
           width={150}
           height={150}
           alt={strMeal}
           src={strMealThumb}
-          className='mix-blend-multiply max-h-40 rounded-full '
+          className='mix-blend-multiply w-full rounded-lg'
         />
       </div>
       <div className='flex flex-col gap-6 p-4 w-full items-center bg-white rounded-b-lg rounded-t-3xl'>
@@ -57,9 +57,9 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
             </span>
           </p>
         </div>
-        <div className='flex justify-between w-full items-center gap-2'>
+        <div className='flex justify-between w-full items-center gap-2 xs:flex-col sm:flex-col md:flex-row'>
           <p>{priceMocked}</p>
-          <Button  onClick={()=> addProduct(product)}>Adicionar</Button>
+          <Button onClick={() => addProduct(product)}>Adicionar</Button>
         </div>
       </div>
     </div>
