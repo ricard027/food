@@ -2,6 +2,7 @@ import { Icategory } from '@/types/category'
 import { FC } from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 const CategoryWidget: FC<Icategory> = ({
   strCategory,
@@ -9,7 +10,10 @@ const CategoryWidget: FC<Icategory> = ({
   strCategoryDescription
 }) => {
   return (
-    <div className='bg-accent bg-gray-50 p-4 items-center text-center rounded-md flex flex-col cursor-pointer'>
+    <Link
+      href={`/menu?category=${strCategory}`}
+      className='bg-accent bg-gray-50 p-4 items-center text-center rounded-md  flex flex-col cursor-pointer  hover:bg-gray-100'
+    >
       <div>
         <Image
           className='scale-75 '
@@ -20,7 +24,7 @@ const CategoryWidget: FC<Icategory> = ({
         />
         <p className='font-semibold'>{strCategory.toUpperCase()}</p>
       </div>
-    </div>
+    </Link>
   )
 }
 
