@@ -5,13 +5,9 @@ import MenuView from './menuView'
 
 import MenuWhitoutSearch from './MenuWhitoutSearch'
 
-interface IMenuPageProps {
-  searchParams: {
-    category: string
-  }
-}
 
-const MenuPage = async ({ searchParams }: IMenuPageProps) => {
+
+const MenuPage = async ({ searchParams }:any) => {
   const categoryByParams = searchParams?.category
 
   if (!categoryByParams) {
