@@ -17,16 +17,16 @@ export default function CartSidebar() {
     <>
       <button
         onClick={toggleCart}
-        className='flex items-center space-x-2 focus:outline-none  p-2 rounded-full hover:bg-gray-10 relative'
+        className='relative flex items-center space-x-2 focus:outline-none hover:bg-[rgb(0,0,0,0.04)] p-2 rounded-full'
       >
-        <BsCart2 size={20} />
+        <BsCart2 size={25} />
         <span className='text-textLight text-center text-[10px] p-1 rounded-full w-4 h-4 flex items-center justify-center absolute -top-2 right-0 bg-red-500 text-white'>
           {cartProducts.length}
         </span>
       </button>
       <div
         style={{ display: isOpen ? 'block' : 'none' }}
-        className='bg-[rgba(0,0,0,.2)] w-full z-20 fixed left-0 h-screen top-0  backdrop-blur-sm'
+        className='hover:bg-[rgb(0,0,0,0.04)]  w-full z-20 fixed left-0 h-screen top-0  backdrop-blur-sm'
         onClick={toggleCart}
       />
       <CartView
