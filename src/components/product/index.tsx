@@ -1,13 +1,15 @@
 'use client'
+
 import Image from 'next/image'
 import { FC, useState } from 'react'
-
+import { LuEye } from 'react-icons/lu'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { PiBowlFoodThin } from 'react-icons/pi'
 import Button from '../button'
 import useCart from '@/hook/useCart'
 import IF from '../IF'
 import Quantity from './Quantity'
+import Link from 'next/link'
 
 export interface IProduct {
   idMeal: string
@@ -42,22 +44,28 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
       >
         {favoriteProduct ? <GoHeartFill /> : <GoHeart />}
       </div>
-      <div className='pb-0 relative overflow-hidden w-full flex items-center justify-center pointer-events-none'>
+
+      <div className='cursor-auto overflow-hidden rounded-lg relative  w-full bg-image'>
         <Image
           width={150}
           height={150}
           alt={strMeal}
           src={strMealThumb}
-          className='mix-blend-multiply w-full rounded-lg'
+          className='mix-blend-multiply w-full rounded-lg '
         />
+        <Link
+          id='bg-link'
+          href={`?id=${encodeURIComponent(idMeal)}&name=${encodeURIComponent(strMeal)}`}
+          className='bg-link absolute w-full  h-full  items-center justify-center top-0 left-0 bg-[rgb(0,0,0,0.5)]  opacity-50  backdrop-blur-2xl cursor-auto hidden'
+        >
+          <LuEye size={30} color='#fff' />
+        </Link>
       </div>
       <div className='flex flex-col gap-6 p-4 w-full items-center bg-white rounded-b-lg rounded-t-3xl'>
         <div className='w-full'>
           <p className='flex items-center gap-4 w-full ' title={strMeal}>
             <PiBowlFoodThin size={20} className='text-accent' />
-            <span className='line-clamp-1 text-gray-600 max-w-[80%]'>
-              {strMeal}
-            </span>
+            <span className='line-clamp-1 text-gray-600'>{strMeal}</span>
           </p>
         </div>
         <div className='flex justify-between w-full items-center gap-2 xs:flex-col sm:flex-col md:flex-row'>

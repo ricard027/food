@@ -2,12 +2,11 @@ import Button from '@/components/button'
 import Card from '@/components/card'
 import Image from 'next/image'
 
-// import Shelf from '@/components/shelf'
 import Block from '@/components/block'
 
 import * as motion from 'framer-motion/client'
 import WidgetCategory from '@/components/widgetCategory'
-import Shelf from '@/components/shelf'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -30,7 +29,9 @@ export default function Home() {
           </Block>
 
           <Block time={0.9}>
-            <Button>Get started</Button>
+            <Link href={'/login'}>
+              <Button>Get started</Button>
+            </Link>
           </Block>
         </div>
         <div className='relative sm:pt-10 xs:pt-10 md:pt-0  overflow-hidden'>
@@ -146,7 +147,7 @@ export default function Home() {
       </section>
 
       <section className='bg-white pb-20'>
-        <div className='container m-auto max-w-6xl'>
+        <div className='container m-auto max-w-6xl flex flex-col  items-center'>
           <Block time={0.5}>
             <div className='flex items-center flex-col '>
               <p className='text-primary font-medium text-lg'>Our menu</p>
@@ -157,11 +158,10 @@ export default function Home() {
               </p>
             </div>
           </Block>
-          <div className='flex items-center justify-center mt-20 mb-6 flex-col gap-8'>
-            <div className='xs:px-4 max-w-6xl w-full m-auto sm:px-6 md:px-6 lg:px-0 '>
-              <Shelf />
-            </div>
-            <Button>More Menu</Button>
+          <div className='flex items-center justify-center mt-6'>
+            <Link href={'/menu'}>
+              <Button>More Menu</Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -173,7 +173,9 @@ export default function Home() {
               <p className='font-semibold text-2xl text-white max-w-md text-center'>
                 Join our member and get discount up to 50%
               </p>
-              <Button>Sign up</Button>
+              <Link href={'/register'}>
+                <Button>Sign up</Button>
+              </Link>
             </div>
           </div>
         </section>
