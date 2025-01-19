@@ -10,7 +10,7 @@ import Image from 'next/image'
 const MenuView = ({ products, categoryByParams, filters }: IMenuViewProps) => {
   return (
     <main className='min-h-screen'>
-      <div className='container m-auto  max-w-6xl'>
+      <div className='container m-auto px-4  max-w-6xl'>
         <BreadCrumb />
       </div>
       <div className='w-full h-52 bg-accent overflow-hidden'>
@@ -22,7 +22,7 @@ const MenuView = ({ products, categoryByParams, filters }: IMenuViewProps) => {
           className=''
         />
       </div>
-      <div className='container m-auto  max-w-6xl '>
+      <div className='container m-auto  max-w-6xl px-4 '>
         <h1 className='text-2xl py-4'>{categoryByParams}</h1>
         <div className='pb-6 flex items-center gap-2'>
           <p>{products?.length}</p> results
