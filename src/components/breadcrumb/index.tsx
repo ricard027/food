@@ -13,8 +13,11 @@ const BreadCrumb = () => {
     const urlsearch = window?.location?.search || ''
     const pathName = url.split('/').filter(Boolean)
     const searchUrl = urlsearch.split('=')
-
-    const links = [...pathName, searchUrl[1]].filter(Boolean)
+    const links = [
+      ...pathName,
+      decodeURIComponent(searchUrl[searchUrl.length - 1])
+    ].filter(Boolean)
+    console.log(links, 'linkks')
     setArrayWithLinks(links)
   }, [])
 
