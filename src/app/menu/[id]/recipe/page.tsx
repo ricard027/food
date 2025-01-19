@@ -1,11 +1,12 @@
-import BreadCrumb from '@/components/breadcrumb'
-import Image from 'next/image'
-import React from 'react'
 import { PiBowlFoodThin } from 'react-icons/pi'
 import { RecipeModel } from './recipeModel'
+
 import ProductShelfs from './productShelfs'
 import Description from './description'
 import AddProduct from './addPrduct'
+
+import BreadCrumb from '@/components/breadcrumb'
+import Image from 'next/image'
 
 const ProductDetails = async ({ searchParams }: any) => {
   const id = await searchParams

@@ -5,7 +5,9 @@ import Image from 'next/image'
 import Block from '@/components/block'
 
 import * as motion from 'framer-motion/client'
+
 import WidgetCategory from '@/components/widgetCategory'
+
 import Link from 'next/link'
 
 export default function Home() {
@@ -158,11 +160,13 @@ export default function Home() {
               </p>
             </div>
           </Block>
-          <div className='flex items-center justify-center mt-6'>
-            <Link href={'/menu'}>
-              <Button>More Menu</Button>
-            </Link>
-          </div>
+          <Block time={0.5}>
+            <div className='flex items-center justify-center mt-6'>
+              <Link href={'/menu'}>
+                <Button>More Menu</Button>
+              </Link>
+            </div>
+          </Block>
         </div>
       </section>
       <Block time={0.5}>

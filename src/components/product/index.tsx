@@ -37,7 +37,7 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
   const containThisProductInCart = cartProducts.find(({ id }) => id === idMeal)
 
   return (
-    <div className='flex flex-col justify-between bg-[#f1f1f1]  gap-2 shadow-lg  rounded-lg  items-center relative mb-4'>
+    <div className='flex sm:flex-row md:flex-col xs:flex-row justify-between sm:bg-white xs:bg-white md:bg-[#f1f1f1]  gap-2 shadow-lg  rounded-lg  items-center relative mb-4'>
       <div
         className='absolute flex items-center justify-center  left-4 top-4 cursor-pointer z-10'
         onClick={() => setFavoriteProduct((prev) => !prev)}
@@ -61,7 +61,7 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
           <LuEye size={30} color='#fff' />
         </Link>
       </div>
-      <div className='flex flex-col gap-6 p-4 w-full items-center bg-white rounded-b-lg rounded-t-3xl'>
+      <div className='flex flex-col gap-6 p-4 sm:rounded-b-md sm:rounded-t-md xs:rounded-md w-full items-center bg-white rounded-b-lg rounded-t-3xl'>
         <div className='w-full'>
           <p className='flex items-center gap-4 w-full ' title={strMeal}>
             <PiBowlFoodThin size={20} className='text-accent' />

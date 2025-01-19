@@ -19,11 +19,11 @@ export const Slider: FC<{ children: ReactNode }> = ({ children }) => {
       navigation
       breakpoints={{
         320: {
-          slidesPerView: 2,
+          slidesPerView: 1,
           spaceBetween: 20
         },
         640: {
-          slidesPerView: 2,
+          slidesPerView: 1,
           spaceBetween: 20
         },
         768: {
