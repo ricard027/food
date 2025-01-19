@@ -11,7 +11,7 @@ const CategoryWidget: FC<Icategory> = ({
 }) => {
   return (
     <Link
-      href={`/menu?category=${strCategory}`}
+      href={`/menu/${strCategory}`}
       className='bg-accent bg-gray-50 p-4 items-center text-center rounded-md  flex flex-col cursor-pointer  hover:bg-gray-100'
     >
       <div>
