@@ -16,6 +16,7 @@ const ProductDetails = async ({ searchParams }: any) => {
     (await RecipeModel(id)) as any
 
   if (!product) return <></>
+
   return (
     <div className='min-h-screen pb-20'>
       <section className='container m-auto max-w-6xl px-6'>
