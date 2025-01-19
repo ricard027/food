@@ -26,7 +26,7 @@ export default function CartSidebar() {
       </button>
       <div
         style={{ display: isOpen ? 'block' : 'none' }}
-        className='hover:bg-[rgb(0,0,0,0.04)]  w-full z-20 fixed left-0 h-screen top-0  backdrop-blur-sm'
+        className='bg-[rgb(0,0,0,0.04)]  w-full z-20 fixed left-0 h-screen top-0  backdrop-blur-sm'
         onClick={toggleCart}
       />
       <CartView
