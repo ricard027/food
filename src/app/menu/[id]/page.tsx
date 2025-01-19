@@ -8,13 +8,13 @@ const MenuPage = async ({ params, ...props }: any) => {
   const categoryByParams = await params?.id
   const _searchParams = await props?.searchParams?.id
 
-  const { meals: products } = await GetProductsByCategoryService({
-    category: categoryByParams
-  })
-
   if (typeof _searchParams === 'string') {
     return <ProductDetails searchParams={_searchParams} />
   }
+
+  const { meals: products } = await GetProductsByCategoryService({
+    category: categoryByParams
+  })
 
   return (
     <>
