@@ -7,7 +7,10 @@ export const GetProductsByCategoryService = async ({
 }: IGetProductsByCategoryService) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/filter.php?c=${category}`
+      `${process.env.NEXT_PUBLIC_API_URL}/filter.php?c=${category}`,
+      {
+        cache: 'no-cache'
+      }
     )
     return response.json()
   } catch (error) {
