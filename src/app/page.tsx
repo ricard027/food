@@ -26,7 +26,7 @@ export default function Home() {
           <Block time={0.5}>
             <p className='text-textLight max-w-lg'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-              molestias exercitationem tenetur maxime
+              molestias exercitationem tenetur maxime.
             </p>
           </Block>
 
