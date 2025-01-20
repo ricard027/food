@@ -1,33 +1,29 @@
-import { GetProductsByCategoryService } from '@/service/getProductsByCategoryService'
+'use client'
+
 import { filters } from './options-filter-category.json'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { MenuModel } from './menuModel'
 
 import MenuView from './menuView'
 import ProductDetails from './recipe/page'
 
-export const dynamic = 'force-dynamic'
+const MenuPage = () => {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const _searchParams = searchParams.get('id')
 
-const MenuPage = async ({ params, ...props }: any) => {
-  const categoryByParams = params?.id
-  const _searchParams = props?.searchParams?.id
-
-  if (typeof _searchParams === 'string') {
+  if (_searchParams) { 
     return <ProductDetails searchParams={_searchParams} />
   }
 
-  const { meals: products = [] } =
-    (await GetProductsByCategoryService({
-      category: categoryByParams
-    })) 
-
+  const  products  = MenuModel(pathname.split('/')[2])
 
   return (
-    <>
-      <MenuView
-        categoryByParams={categoryByParams}
-        filters={filters}
-        products={products}
-      />
-    </>
+    <MenuView
+      categoryByParams={_searchParams!}
+      filters={filters}
+      products={products}
+    />
   )
 }
 

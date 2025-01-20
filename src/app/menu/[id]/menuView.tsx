@@ -1,4 +1,3 @@
-'use client'
 import BreadCrumb from '@/components/breadcrumb'
 import Product, { IProduct } from '@/components/product'
 import Select from '@/components/select'
