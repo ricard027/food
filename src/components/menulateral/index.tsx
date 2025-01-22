@@ -1,17 +1,18 @@
 import Image from 'next/image'
 
-import { GrFavorite } from 'react-icons/gr'
-import { IoLocationOutline } from 'react-icons/io5'
-import { BsBoxArrowLeft, BsCart2 } from 'react-icons/bs'
-import { AiOutlineUser } from 'react-icons/ai'
+import { BsBoxArrowLeft } from 'react-icons/bs'
 import { FaPenToSquare } from 'react-icons/fa6'
 import { IUser } from '@/types/user'
+import Link from 'next/link'
+import { navigation } from './links'
+import { usePathname } from 'next/navigation'
 
 interface IMenuLateral {
   userData: IUser
 }
 
 const MenuLateral = ({ userData }: IMenuLateral) => {
+  const path = usePathname()
   return (
     <aside className='sm:hidden xs:hidden flex-col bg-gray-50 text-center p-6 mb-2 rounded-md md:flex'>
       <div>
@@ -34,28 +35,30 @@ const MenuLateral = ({ userData }: IMenuLateral) => {
           Hello, <span className='font-medium'>{userData?.name}</span>
         </p>
       </div>
-      <nav className='mt-6'>
+      <nav className='mt-6 menulateral'>
         <ul className='flex flex-col gap-2'>
-          <li className='p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'>
-            <AiOutlineUser size={20} />
-            Profile
-          </li>
-          <li className='p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'>
-            <GrFavorite size={20} />
-            Wishlist
-          </li>
-          <li className='p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'>
-            <BsCart2 size={20} />
-            Orders
-          </li>
-          <li className='p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'>
-            <IoLocationOutline size={20} />
-            addresses
-          </li>
-          <li className='p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'>
+          {navigation.map(({ url, text, icon: Icon }) => {
+            const IS_CURRENT_LINK = path === url
+
+            return (
+              <Link
+                data-actived={IS_CURRENT_LINK}
+                href={url}
+                key={url}
+                className='w-full p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'
+              >
+                <span className='block'>
+                  <Icon size={20} />
+                </span>
+                {text}
+              </Link>
+            )
+          })}
+
+          <button className='p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer rounded-md flex items-center gap-2'>
             <BsBoxArrowLeft size={20} />
             Logout
-          </li>
+          </button>
         </ul>
       </nav>
     </aside>
