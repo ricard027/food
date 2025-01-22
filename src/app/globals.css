@@ -25,3 +25,32 @@
 .bg-image:hover .bg-link {
   display: flex;
 }
+
+.menulateral a[data-actived='true'] {
+  background-color: #f3f4f6;
+  position: relative;
+
+  color: white;
+  background-color: #333;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 10px;
+    width: 100%;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+}
+
+.h1-page {
+  padding: 1rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
