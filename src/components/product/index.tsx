@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { LuEye } from 'react-icons/lu'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { PiBowlFoodThin } from 'react-icons/pi'
@@ -10,7 +10,8 @@ import useCart from '@/hook/useCart'
 import IF from '../IF'
 import Quantity from './Quantity'
 import Link from 'next/link'
-
+import { SaveProductInWishListService } from '@/service/saveProductInWishListService'
+import useUser from '@/hook/useUser'
 export interface IProduct {
   idMeal: string
   strMeal: string
@@ -18,8 +19,10 @@ export interface IProduct {
 }
 
 const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
-  const [favoriteProduct, setFavoriteProduct] = useState(false)
   const { addProduct, toggleCart, cartProducts } = useCart()
+  const { userData } = useUser()
+  const isInWishList = userData?.wishlist?.find(({ id }) => id === idMeal)
+  const [favoriteProduct, setFavoriteProduct] = useState(!!isInWishList)
 
   const priceMocked = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -34,15 +37,25 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
     quantity: 1
   }
 
+
+
+  const _id = userData?.id
   const containThisProductInCart = cartProducts.find(({ id }) => id === idMeal)
+
+  useEffect(() => {
+    const isInWishList = userData?.wishlist?.find(({ id }) => id === idMeal)
+    return setFavoriteProduct(!!isInWishList)
+  }, [userData?.wishlist, idMeal])
 
   return (
     <div className='flex sm:flex-row md:flex-col xs:flex-row justify-between sm:bg-white xs:bg-white md:bg-[#f1f1f1]  gap-2 shadow-lg  rounded-lg  items-center relative mb-4'>
       <div
         className='absolute flex items-center justify-center  left-4 top-4 cursor-pointer z-10'
-        onClick={() => setFavoriteProduct((prev) => !prev)}
+        onClick={() => {
+          SaveProductInWishListService({ product, userId: _id })
+        }}
       >
-        {favoriteProduct ? <GoHeartFill /> : <GoHeart />}
+        {favoriteProduct ? <GoHeartFill color='rgb(235 24 24)'/> : <GoHeart />}
       </div>
 
       <div className='cursor-auto overflow-hidden rounded-lg relative  w-full bg-image'>
@@ -55,7 +68,7 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
         />
         <Link
           id='bg-link'
-          href={`?id=${encodeURIComponent(idMeal)}&name=${encodeURIComponent(strMeal)}`}
+          href={`/recipe?id=${encodeURIComponent(idMeal)}&name=${encodeURIComponent(strMeal)}`}
           className='bg-link absolute w-full  h-full  items-center justify-center top-0 left-0 bg-[rgb(0,0,0,0.5)]  opacity-50  backdrop-blur-2xl cursor-auto hidden'
         >
           <LuEye size={30} color='#fff' />
@@ -78,7 +91,7 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
                 toggleCart()
               }}
             >
-              {containThisProductInCart ? 'Adicionado' : 'Adicionar'}
+              Adicionar
             </Button>
           </IF>
 

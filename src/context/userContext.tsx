@@ -5,6 +5,8 @@ import { GetUserService } from '@/service/getUserService'
 import { IUser } from '@/types/user'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { createContext, FC, ReactNode, useEffect, useState } from 'react'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { db } from '@/config/firebaseconfig'
 
 interface IUserContext {
   userData: IUser | null
@@ -24,24 +26,32 @@ const UserContextProvider: FC<UserContextProviderProps> = ({ children }) => {
   const handleLogoutUser = async () => {
     try {
       await signOut(auth)
+      window.location.href = '/login'
     } catch (error) {
       console.error('Erro ao deslogar:', error)
     }
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userResult = (await GetUserService(user)) as IUser
         setUserData(userResult)
-        console.log('Usuário autenticado:', user)
+
+        const userDocRef = doc(db, 'users', user.uid)
+        const unsubscribeFirestore = onSnapshot(userDocRef, (doc) => {
+          if (doc.exists()) {
+            setUserData(doc.data() as IUser)
+          }
+        })
+
+        return () => unsubscribeFirestore()
       } else {
         setUserData(null)
-        console.log('Nenhum usuário autenticado')
       }
     })
 
-    return () => unsubscribe()
+    return () => unsubscribeAuth()
   }, [])
 
   return (

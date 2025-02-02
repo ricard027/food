@@ -31,11 +31,11 @@ const MenuWhitoutSearch = async () => {
           className='w-full p-4 bg-gray-100 rounded-lg pl-16'
         />
       </div>
-      <GridLayout>
+      <section className='max-w-6xl grid sm:grid-cols-3  xs:grid-cols-2 flex-col gap-4 lg:grid-cols-4  md:grid-cols-3 m-auto px-4'>
         {allCategories?.map((data, key) => (
           <CategoryWidget {...data} key={key} />
         ))}
-      </GridLayout>
+      </section >
     </section>
   )
 }

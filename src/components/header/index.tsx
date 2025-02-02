@@ -13,8 +13,8 @@ const HeaderComponent = () => {
         <div className='container m-auto flex max-w-6xl items-center justify-between py-4  px-4'>
           <Link className='flex items-baseline gap-1' href={'/'}>
             <Image src='/logo.svg' alt='image logo' width={30} height={30} />
-            <p className='md:text-lg sm:text-sm xs:text-sm  font-light '>
-              Lets Foods
+            <p className='md:text-lg sm:text-sm xs:text-sm  font-semibold'>
+              Lets Flavorly
             </p>
           </Link>
           <nav className='xs:hidden md:flex sm:hidden '>

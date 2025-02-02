@@ -1,6 +1,7 @@
 'use client'
 
 import { FC, useState } from 'react'
+import { GrRestaurant } from 'react-icons/gr'
 
 interface IDescription {
   strInstructions: string
@@ -10,9 +11,13 @@ const Description: FC<IDescription> = ({ strInstructions }) => {
   const [moreDecription, setMoreDescription] = useState(false)
   return (
     <div className='mt-4'>
-      <h3 className='text-lg font-semibold border-b-2 pb-2 mb-4 '>
-        Description
-      </h3>
+      <div className=' border-b-2 pb-2 mb-4 flex items-center gap-2'>
+        <GrRestaurant size={20} className='text-accent font-light' />
+        <h3 className='text-lg font-semibold '>
+          Description
+        </h3>
+      </div>
+
       <p
         className={`${!moreDecription ? 'line-clamp-4' : ' line-clamp-none'} text-textLight transition-all`}
       >

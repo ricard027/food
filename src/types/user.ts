@@ -1,3 +1,5 @@
+import { ICartProduct } from '@/components/cartProduct/cart'
+
 export interface IUser {
   name: string
   email: string
@@ -5,4 +7,5 @@ export interface IUser {
   provider: string
   id: string
   profileImage?: string
+  wishlist?: ICartProduct[]
 }

@@ -54,3 +54,7 @@
     text-transform: uppercase;
   }
 }
+
+a[href="/recipe"]{
+  pointer-events: none;
+}
