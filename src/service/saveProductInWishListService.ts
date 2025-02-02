@@ -8,7 +8,7 @@ export const SaveProductInWishListService = async ({
   const userRef = doc(db, 'users', userId)
   const userSnap = await getDoc(userRef)
   const userData = userSnap.data() ?? {}
-  const _wishlist = userData?.wishlist
+  const _wishlist = userData?.wishlist ?? []
   const productExists = _wishlist?.find(({ id }: any) => id === product.id)
 
   if (productExists) {
