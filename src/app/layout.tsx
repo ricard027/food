@@ -12,8 +12,8 @@ const Readex = Readex_Pro({
 })
 
 export const metadata: Metadata = {
-  title: 'Foods',
-  description: 'Lets foods'
+  title: 'Flavorly',
+  description: 'Lets Flavorly'
 }
 
 export default function RootLayout({
