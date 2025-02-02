@@ -21,6 +21,7 @@ export interface IProduct {
 const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
   const { addProduct, toggleCart, cartProducts } = useCart()
   const { userData } = useUser()
+  
   const isInWishList = userData?.wishlist?.find(({ id }) => id === idMeal)
   const [favoriteProduct, setFavoriteProduct] = useState(!!isInWishList)
 
@@ -37,14 +38,15 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
     quantity: 1
   }
 
-
-
   const _id = userData?.id
-  const containThisProductInCart = cartProducts.find(({ id }) => id === idMeal)
+
+  const containThisProductInCart = cartProducts?.find(({ id }) => id === idMeal)
 
   useEffect(() => {
-    const isInWishList = userData?.wishlist?.find(({ id }) => id === idMeal)
-    return setFavoriteProduct(!!isInWishList)
+    if (userData?.wishlist) {
+      const isInWishList = userData?.wishlist?.find(({ id }) => id === idMeal)
+      return setFavoriteProduct(!!isInWishList)
+    }
   }, [userData?.wishlist, idMeal])
 
   return (
@@ -55,7 +57,7 @@ const Product: FC<IProduct> = ({ idMeal, strMeal, strMealThumb }) => {
           SaveProductInWishListService({ product, userId: _id })
         }}
       >
-        {favoriteProduct ? <GoHeartFill color='rgb(235 24 24)'/> : <GoHeart />}
+        {favoriteProduct ? <GoHeartFill color='rgb(235 24 24)' /> : <GoHeart />}
       </div>
 
       <div className='cursor-auto overflow-hidden rounded-lg relative  w-full bg-image'>
