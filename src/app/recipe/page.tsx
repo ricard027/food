@@ -1,15 +1,15 @@
-import { PiBowlFoodThin } from 'react-icons/pi'
 import { RecipeModel } from './recipeModel'
 
-import ProductShelfs from './productShelfs'
 import Description from './description'
 import AddProduct from './addPrduct'
 
 import BreadCrumb from '@/components/breadcrumb'
 import Image from 'next/image'
+import ProductShelfs from './productShelfs'
+import Ingredients from './ingredients'
 
 const ProductDetails = async ({ searchParams }: any) => {
-  const id = await searchParams
+  const { id } = await searchParams
 
   if (!id) return
 
@@ -42,21 +42,7 @@ const ProductDetails = async ({ searchParams }: any) => {
                 {product.strCategory}
               </span>
             </div>
-            <div className=' border-b-2 pb-2 mb-4 flex items-center gap-2'>
-              <PiBowlFoodThin size={20} className='text-accent' />
-              <h3 className='text-lg font-semibold py-2'>ingredients</h3>
-            </div>
-            <div className='flex flex-wrap gap-2'>
-              {ingredients.map((ingredient: string, index: number) => {
-                if (!!ingredient) {
-                  return (
-                    <span key={index} className='p-2 rounded-md bg-gray-50'>
-                      {ingredient}
-                    </span>
-                  )
-                }
-              })}
-            </div>
+
             <div className='p-2'>
               <div>
                 <p className='text-md line-through text-gray-700'>
@@ -68,6 +54,7 @@ const ProductDetails = async ({ searchParams }: any) => {
             </div>
           </div>
         </div>
+        <Ingredients ingredients={ingredients} />
         <Description strInstructions={product.strInstructions} />
         <ProductShelfs area={product.strArea} category={product.strCategory} />
       </section>
