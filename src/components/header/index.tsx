@@ -5,8 +5,17 @@ import Link from 'next/link'
 
 import ProfileMenu from './menu'
 import CartSidebar from '../cart'
+import { usePathname } from 'next/navigation'
 
 const HeaderComponent = () => {
+  const URLS_SHOLD_NOT_USE = ['login','register']
+  
+  const router = usePathname()
+
+  if(URLS_SHOLD_NOT_USE.includes(router.replace('/',''))){
+    return <></>
+  }
+
   return (
     <>
       <header className='z-50 fixed left-0 top-0 flex w-screen items-center justify-center bg-secondary sm:px-6 xs:px-6 md:px-0'>
